@@ -1,0 +1,16 @@
+{
+  "name": "cv-maker",
+  "version": "1.0.0",
+  "description": "CV Maker Application with AWS Amplify",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev:frontend": "cd cv-app-frontend && npm run dev",
+    "dev:backend": "cd cv-app-ng-backend && uvicorn app.main:app --reload --port 8000",
+    "build": "cd cv-app-frontend && npm run build",
+    "deploy": "npx ampx sandbox deploy",
+    "sandbox": "npx ampx sandbox"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

@@ -1,0 +1,21 @@
+# Copy this file to terraform.tfvars and update the values
+
+# AWS Configuration
+aws_region = "us-east-1"
+project_name = "cv-maker"
+environment = "production"
+
+# Domain Configuration
+domain_name = "your-domain.com"
+route53_zone_id = "Z1234567890ABC"  # Your Route53 hosted zone ID
+
+# Network Configuration
+vpc_cidr = "10.0.0.0/16"
+public_subnet_cidrs = ["10.0.1.0/24", "10.0.2.0/24"]
+private_subnet_cidrs = ["10.0.10.0/24", "10.0.20.0/24"]
+
+# Application Configuration
+app_port = 8000
+app_count = 2
+fargate_cpu = 512
+fargate_memory = 1024

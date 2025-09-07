@@ -1,0 +1,48 @@
+# Core FastAPI and web framework dependencies
+fastapi
+uvicorn[standard]
+# OpenAI API client
+openai
+
+# Environment and configuration
+python-dotenv
+
+# Document processing
+PyMuPDF
+python-docx
+
+# Machine Learning and AI
+# torch  # Commented out - not compatible with Python 3.13
+numpy
+# sentence-transformers  # Commented out - requires torch
+
+# LangChain ecosystem
+langchain-community
+langchain-openai
+langchain
+langchain-chroma
+langchain-pinecone
+
+# Vector databases
+pinecone
+chromadb
+
+# Evaluation framework
+ragas
+datasets
+
+# Data processing
+pandas
+
+# HTTP client for async requests
+httpx
+
+# Pydantic for data validation
+pydantic
+
+# CORS middleware
+python-multipart
+
+# PDF generation and templating
+jinja2
+weasyprint

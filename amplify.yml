@@ -1,0 +1,29 @@
+version: 1
+backend:
+  phases:
+    build:
+      commands:
+        - echo "Backend build started on `date`"
+        - echo "Installing Python dependencies..."
+        - pip install -r cv-app-ng-backend/requirements.txt
+        - echo "Backend build completed on `date`"
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - echo "Frontend preBuild started on `date`"
+        - cd cv-app-frontend
+        - npm ci
+    build:
+      commands:
+        - echo "Frontend build started on `date`"
+        - npm run build
+        - echo "Frontend build completed on `date`"
+  artifacts:
+    baseDirectory: cv-app-frontend/dist
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - cv-app-frontend/node_modules/**/*
+      - cv-app-frontend/.npm/**/*
