@@ -10,6 +10,7 @@ from ..services.vectorstore_service import VectorstoreService
 from ..services.evaluation_service import EvaluationService
 from ..services.data_transformation_service import DataTransformationService
 from ..utils.file_processing import extract_text_from_pdf, extract_text_from_docx
+from ..utils.security import validate_uploaded_file, validate_job_description, validate_cv_text
 from ..utils.debug import print_step
 
 router = APIRouter(prefix="/cv", tags=["CV"])
@@ -25,20 +26,24 @@ async def tailor_cv(request: CVRequest):
     """
     Tailor a CV based on job description and user CV text.
     """
+    # Validate and sanitize inputs
+    validated_job_description = validate_job_description(request.job_description)
+    validated_cv_text = validate_cv_text(request.user_cv_text)
+    
     print_step("CV Tailoring Request", {
-        "job_description_length": len(request.job_description),
-        "user_cv_text_length": len(request.user_cv_text)
+        "job_description_length": len(validated_job_description),
+        "user_cv_text_length": len(validated_cv_text)
     }, "input")
 
     # Create documents from CV text
-    docs = vectorstore_service.create_documents(request.user_cv_text)
+    docs = vectorstore_service.create_documents(validated_cv_text)
     
     # Clear existing documents and add new ones
     vectorstore_service.clear_vectorstore()
     vectorstore_service.add_documents(docs)
 
     # Retrieve relevant documents
-    retrieved_docs = vectorstore_service.retrieve_documents(request.job_description)
+    retrieved_docs = vectorstore_service.retrieve_documents(validated_job_description)
     retrieved_context = "\n\n".join([doc.page_content for doc in retrieved_docs])
     
     print_step("Document Retrieval", {
@@ -97,14 +102,27 @@ async def tailor_cv_from_file(job_description: str, cv_file: UploadFile = File(.
     """
     Tailor a CV from uploaded file.
     """
-    print_step("File Upload Request", {
-        "filename": cv_file.filename,
-        "content_type": cv_file.content_type,
-        "job_description_length": len(job_description)
-    }, "input")
+    # Validate job description
+    validated_job_description = validate_job_description(job_description)
     
+    # Read file content
     file_content = await cv_file.read()
-    print_step("File Reading", {"file_size": len(file_content)}, "output")
+    
+    # Validate uploaded file
+    from ..core.config import settings
+    validation_result = validate_uploaded_file(
+        file_content=file_content,
+        filename=cv_file.filename or "unknown",
+        allowed_types=settings.ALLOWED_FILE_TYPES,
+        max_size=settings.MAX_FILE_SIZE
+    )
+    
+    print_step("File Upload Request", {
+        "filename": validation_result["sanitized_filename"],
+        "content_type": validation_result["mime_type"],
+        "file_size": validation_result["file_size"],
+        "job_description_length": len(validated_job_description)
+    }, "input")
     
     print_step("File Type Detection", {"filename": cv_file.filename}, "input")
     if cv_file.filename.endswith(".pdf"):

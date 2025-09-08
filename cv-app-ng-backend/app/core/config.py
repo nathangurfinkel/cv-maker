@@ -19,14 +19,18 @@ class Settings:
     VERBOSE: bool = os.getenv("VERBOSE", "false").lower() == "true"
     ENVIRONMENT: str = os.getenv("ENVIRONMENT", "development")
     
-    # CORS Configuration
+    # CORS Configuration - Restrict to specific domains
     CORS_ORIGINS: List[str] = [
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-        "https://*.amplifyapp.com",  # AWS Amplify default domain
-        "https://*.amazonaws.com",   # AWS API Gateway
-        "https://cv-maker.example.com"  # Replace with your actual domain
+        "http://localhost:5173",  # Development only
+        "http://127.0.0.1:5173",  # Development only
+        # Production domains will be added via environment variables
     ]
+    
+    # Add production CORS origins from environment
+    PRODUCTION_CORS_ORIGINS: List[str] = os.getenv("CORS_ORIGINS", "").split(",") if os.getenv("CORS_ORIGINS") else []
+    
+    # Combine development and production origins
+    ALL_CORS_ORIGINS: List[str] = CORS_ORIGINS + [origin.strip() for origin in PRODUCTION_CORS_ORIGINS if origin.strip()]
     
     # OpenAI Configuration
     OPENAI_API_KEY: str = os.getenv("OPENAI_API_KEY", "")

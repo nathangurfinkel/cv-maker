@@ -46,3 +46,7 @@ python-multipart
 # PDF generation and templating
 jinja2
 weasyprint
+
+# Security and rate limiting
+slowapi
+python-magic
