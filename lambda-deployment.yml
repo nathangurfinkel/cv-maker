@@ -1,0 +1,21 @@
+# Lambda Function Deployment Configuration
+# This will be used to deploy your FastAPI backend as a Lambda function
+
+version: 1
+backend:
+  phases:
+    build:
+      commands:
+        - echo "Backend build started on `date`"
+        - echo "Installing Python dependencies..."
+        - pip install -r cv-app-ng-backend/requirements.txt
+        - echo "Creating Lambda deployment package..."
+        - cd cv-app-ng-backend
+        - zip -r ../lambda-deployment.zip . -x "*.pyc" "__pycache__/*" "*.git*" "tests/*"
+        - cd ..
+        - echo "Backend build completed on `date`"
+  artifacts:
+    baseDirectory: .
+    files:
+      - lambda-deployment.zip
+      - cv-app-ng-backend/**

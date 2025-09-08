@@ -1,0 +1,30 @@
+# Lambda-specific requirements
+# Core FastAPI and ASGI
+fastapi==0.116.1
+uvicorn[standard]==0.35.0
+mangum==0.18.0
+
+# Your existing requirements
+python-multipart==0.0.20
+python-dotenv==1.1.1
+pydantic==2.10.3
+pydantic-settings==2.10.1
+
+# AI and ML dependencies
+openai==1.58.1
+pinecone-client==5.0.1
+tiktoken==0.11.0
+
+# Document processing
+python-docx==1.2.0
+python-magic==0.4.27
+
+# Security and rate limiting
+slowapi==0.1.9
+
+# HTTP client
+httpx==0.28.1
+requests==2.32.5
+
+# Utilities
+tenacity==9.1.2
