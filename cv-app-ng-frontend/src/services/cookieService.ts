@@ -85,7 +85,7 @@ class CookieService {
   }
 
   // Analytics tracking (only if consent given)
-  public trackEvent(eventName: string, properties?: Record<string, any>): void {
+  public trackEvent(eventName: string, properties?: Record<string, unknown>): void {
     if (!this.canUseAnalytics()) {
       console.log('Analytics tracking disabled - no consent');
       return;
@@ -102,7 +102,7 @@ class CookieService {
   }
 
   // Marketing tracking (only if consent given)
-  public trackMarketingEvent(eventName: string, properties?: Record<string, any>): void {
+  public trackMarketingEvent(eventName: string, properties?: Record<string, unknown>): void {
     if (!this.canUseMarketing()) {
       console.log('Marketing tracking disabled - no consent');
       return;
@@ -114,7 +114,7 @@ class CookieService {
   }
 
   // Preference storage (only if consent given)
-  public setPreference(key: string, value: any): void {
+  public setPreference(key: string, value: unknown): void {
     if (!this.canUsePreferences()) {
       console.log('Preference storage disabled - no consent');
       return;
@@ -129,7 +129,7 @@ class CookieService {
     }
   }
 
-  public getPreference(key: string, defaultValue?: any): any {
+  public getPreference<T = unknown>(key: string, defaultValue?: T): T | undefined {
     if (!this.canUsePreferences()) {
       return defaultValue;
     }

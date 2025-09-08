@@ -1,9 +1,10 @@
 import React from 'react';
 import { Box, Text } from '@mantine/core';
 import { CVStepperWizard } from '../CVStepperWizard';
+import type { CVData } from '../../types';
 
 interface StepperSectionProps {
-  onCVDataUpdate: (data: any) => void;
+  onCVDataUpdate: (data: CVData) => void;
   onDownloadPDF: () => void;
 }
 

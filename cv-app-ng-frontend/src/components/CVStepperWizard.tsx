@@ -5,9 +5,10 @@ import { DataExtraction } from './DataExtraction';
 import { CVForm } from './CVForm';
 import { CVEvaluation } from './CVEvaluation';
 import { useCVData } from '../hooks/useCVData';
+import type { CVData } from '../types';
 
 interface CVStepperWizardProps {
-  onCVDataUpdate: (data: any) => void;
+  onCVDataUpdate: (data: CVData) => void;
   onDownloadPDF: () => void;
 }
 
@@ -71,7 +72,7 @@ export const CVStepperWizard: React.FC<CVStepperWizardProps> = ({
   const nextStep = () => setActive((current) => (current < steps.length ? current + 1 : current));
   const prevStep = () => setActive((current) => (current > 0 ? current - 1 : current));
 
-  const handleCVDataUpdate = (newData: any) => {
+  const handleCVDataUpdate = (newData: CVData) => {
     setCvData(newData);
     onCVDataUpdate(newData);
   };

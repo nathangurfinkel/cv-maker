@@ -33,7 +33,7 @@ export const CVEvaluation: React.FC<CVEvaluationProps> = ({ cvData }) => {
       let resultText = '';
       if (data.individual_evaluations) {
         resultText = 'AI Evaluation Results:\n\n';
-        data.individual_evaluations.forEach((evaluation: any) => {
+        data.individual_evaluations.forEach((evaluation) => {
           resultText += `${evaluation.persona}: ${evaluation.score}/10\n`;
           resultText += `Justification: ${evaluation.justification}\n\n`;
         });

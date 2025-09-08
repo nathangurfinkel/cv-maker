@@ -127,7 +127,7 @@ export const CVForm: React.FC<CVFormProps> = ({ data, onDataChange, currentStep 
       if (editingExperienceIndex === index) setEditingExperienceIndex(null);
     };
 
-    const updateExperience = (index: number, field: keyof Experience, value: any) => {
+    const updateExperience = (index: number, field: keyof Experience, value: unknown) => {
       const newExperiences = [...form.values.experience];
       newExperiences[index] = { ...newExperiences[index], [field]: value };
       form.setFieldValue('experience', newExperiences);
@@ -442,7 +442,7 @@ export const CVForm: React.FC<CVFormProps> = ({ data, onDataChange, currentStep 
       form.setFieldValue('projects', newProjects);
     };
 
-    const updateProject = (index: number, field: keyof Project, value: any) => {
+    const updateProject = (index: number, field: keyof Project, value: unknown) => {
       const newProjects = [...form.values.projects];
       newProjects[index] = { ...newProjects[index], [field]: value };
       form.setFieldValue('projects', newProjects);

@@ -3,7 +3,7 @@
  * Follows Single Responsibility Principle - handles only API communication.
  */
 
-import type { CVData, PDFRequest } from '../types';
+import type { CVData, PDFRequest, CommitteeEvaluation } from '../types';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
 
@@ -130,7 +130,7 @@ export class ApiService {
   /**
    * Evaluate CV with AI committee
    */
-  static async evaluateCV(cvData: CVData, jobDescription: string): Promise<any> {
+  static async evaluateCV(cvData: CVData, jobDescription: string): Promise<CommitteeEvaluation> {
     const response = await fetch(`${API_BASE_URL}/evaluation/cv`, {
       method: 'POST',
       headers: {
