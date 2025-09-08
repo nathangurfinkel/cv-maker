@@ -23,7 +23,7 @@ export const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ opened, onClose })
       title={<Title order={3}>Privacy Policy & Cookie Information</Title>}
       size="lg"
       centered
-      scrollAreaComponent="div"
+      scrollAreaComponent={undefined}
     >
       <Stack gap="md">
         <Text size="sm" c="dimmed">

@@ -11,12 +11,11 @@ import {
   Anchor,
   Box,
   Modal,
-  Title,
   List,
   ThemeIcon,
 } from '@mantine/core';
-import { IconCookie, IconSettings, IconCheck, IconX, IconInfoCircle } from '@tabler/icons-react';
-import { useCookieConsent, CookiePreferences } from '../hooks/useCookieConsent';
+import { IconCookie, IconSettings, IconCheck, IconX } from '@tabler/icons-react';
+import { useCookieConsent, type CookiePreferences } from '../hooks/useCookieConsent';
 import { PrivacyPolicy } from './PrivacyPolicy';
 
 export const CookieConsentBanner: React.FC = () => {
@@ -27,8 +26,6 @@ export const CookieConsentBanner: React.FC = () => {
     acceptAll,
     acceptSelected,
     rejectAll,
-    showSettings,
-    updatePreferences,
   } = useCookieConsent();
 
   const [showDetails, setShowDetails] = useState(false);

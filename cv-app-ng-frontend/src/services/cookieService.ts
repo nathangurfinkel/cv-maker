@@ -1,4 +1,4 @@
-import { CookiePreferences } from '../hooks/useCookieConsent';
+import { type CookiePreferences } from '../hooks/useCookieConsent';
 
 class CookieService {
   private static instance: CookieService;
