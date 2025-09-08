@@ -12,18 +12,20 @@ frontend:
     preBuild:
       commands:
         - echo "Frontend preBuild started on `date`"
-        - cd cv-app-frontend
+        - cd cv-app-ng-frontend
         - npm ci
     build:
       commands:
         - echo "Frontend build started on `date`"
+        - echo "Setting environment variables for production build"
+        - export VITE_ENVIRONMENT=production
         - npm run build
         - echo "Frontend build completed on `date`"
   artifacts:
-    baseDirectory: cv-app-frontend/dist
+    baseDirectory: cv-app-ng-frontend/dist
     files:
       - '**/*'
   cache:
     paths:
-      - cv-app-frontend/node_modules/**/*
-      - cv-app-frontend/.npm/**/*
+      - cv-app-ng-frontend/node_modules/**/*
+      - cv-app-ng-frontend/.npm/**/*
